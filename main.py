@@ -19,9 +19,14 @@ def main():
         help="Extract info from redbook note html"
     )
     redbook_parser.add_argument(
-        "html",
+        "--html",
         type=Path,
         help="Path to the html file to extract info from"
+    )
+    redbook_parser.add_argument(
+        "--folder",
+        type=Path,
+        help="Path to the html folder to extract info from"
     )
     redbook_parser.add_argument(
         "--sheet",
@@ -38,7 +43,10 @@ def main():
     load_dotenv()
 
     if args.mode == "redbook":
-        note = redbook.extract_redbook(args.html)
+        if args.html:
+            note = redbook.extract_redbook(args.html)
+        else:
+            note = redbook.extract_folder(args.folder)
         if args.sheet:
             sheet_id = args.sheet
         else:

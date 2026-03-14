@@ -49,3 +49,12 @@ def extract_redbook(html_path: Path) -> RedbookNote:
         print(f"Comments: {note.comments}")
     
     return note
+
+def extract_folder(html_folder: Path) -> list[RedbookNote]:
+    """Extract info from a HTML folder"""
+    notes = []
+    # glob 递归匹配所有 .html/.htm 文件，rglob = recursive glob
+    for file in html_folder.rglob("*.html"):
+        note = extract_redbook(file)
+        notes.append(note)
+    return notes
