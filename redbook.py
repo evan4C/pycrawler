@@ -32,7 +32,7 @@ def _parse_redbook_html(html: str) -> RedbookNote:
 
     return RedbookNote(**results)
 
-def extract_redbook(html_path: Path) -> None:
+def extract_redbook(html_path: Path) -> RedbookNote:
     """Extract information from a redbook HTML file"""
     if not html_path.exists():
         print(f"Error: File not found: {html_path}")
@@ -47,3 +47,5 @@ def extract_redbook(html_path: Path) -> None:
         print(f"Likes: {note.likes}")
         print(f"Collects: {note.collects}")
         print(f"Comments: {note.comments}")
+    
+    return note
